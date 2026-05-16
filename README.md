@@ -3,7 +3,11 @@ Code to reproduce the analysis and figures in the paper [Alignment and Integrati
 Spatial Transcriptomics
 Data](https://www.nature.com/articles/s41592-022-01459-6). 
 ## Datasets
-* All preprocessed datasets can be found on [Dataset 1](https://doi.org/10.5281/zenodo.18039571). 
+* All preprocessed datasets can be found on
+* [Dataset 1](https://doi.org/10.5281/zenodo.18039571)
+* [Dataset 2](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE158380)
+* [Dataset 1](https://doi.org/10.5281/zenodo.18039571)
+* [Dataset 1](https://doi.org/10.5281/zenodo.18039571).
 * For convenience there is a script called
 [`download_data.sh`](scripts/download_data.sh) that
 will download all the relevant files to the [data](data/) directory in the
