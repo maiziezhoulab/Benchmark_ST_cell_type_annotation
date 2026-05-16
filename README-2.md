@@ -1,4 +1,4 @@
-# Paste reproducibility
+# Code reproducibility
 Code to reproduce the analysis and figures in the paper [Alignment and Integration of
 Spatial Transcriptomics
 Data](https://www.nature.com/articles/s41592-022-01459-6). The Paste
