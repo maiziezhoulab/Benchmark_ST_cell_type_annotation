@@ -6,8 +6,10 @@ Data](https://www.nature.com/articles/s41592-022-01459-6).
 * All preprocessed datasets can be found on
 * [Dataset 1](https://doi.org/10.5281/zenodo.18039571)
 * [Dataset 2](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE158380)
-* [Dataset 1](https://doi.org/10.5281/zenodo.18039571)
-* [Dataset 1](https://doi.org/10.5281/zenodo.18039571).
+* [Dataset 3](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi)
+* [Dataset 4](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE269719)
+* [Dataset 5](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE139107)
+* [Dataset 6](https://db.cngb.org/stomics/artista)
 * For convenience there is a script called
 [`download_data.sh`](scripts/download_data.sh) that
 will download all the relevant files to the [data](data/) directory in the
