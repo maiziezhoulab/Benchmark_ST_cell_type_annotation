@@ -1,13 +1,9 @@
-# Paste reproducibility
+# Code reproducibility
 Code to reproduce the analysis and figures in the paper [Alignment and Integration of
 Spatial Transcriptomics
-Data](https://www.nature.com/articles/s41592-022-01459-6). The Paste
-python package is located [here](https://github.com/raphael-group/paste).
-Note that this repo used Paste version 1.1.4 so any newer versions of Paste
-might have some issues (mostly likely related to minor utilities).
-
+Data](https://www.nature.com/articles/s41592-022-01459-6). 
 ## Datasets
-* All preprocessed datasets can be found on [zenodo](https://doi.org/10.5281/zenodo.6334774). 
+* All preprocessed datasets can be found on [Dataset 1](https://doi.org/10.5281/zenodo.18039571). 
 * For convenience there is a script called
 [`download_data.sh`](scripts/download_data.sh) that
 will download all the relevant files to the [data](data/) directory in the
