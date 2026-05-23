@@ -121,6 +121,7 @@ plot_scmmib_summary <- function(
       label = rep(colnames(dat_mat), each = nrow(dat_mat)),
       x0    = rep(column_pos$x[ind_circle], each = nrow(dat_mat)),
       y0    = rep(row_pos$y, times = length(ind_circle)),
+      raw   = as.vector(dat_mat),
       r     = (row_height/2) * as.vector(sqrt(dat_mat))
     )
     for (lab in unique(circle_data$label)) {
@@ -164,6 +165,8 @@ plot_scmmib_summary <- function(
     ) %>%
       add_column_if_missing(hjust = 0) %>%
       dplyr::mutate(
+        cell_xc = (xmin + xmax) / 2,
+        cell_yc = (ymin + ymax) / 2,
         xmin = xmin + (1 - value) * xwidth * hjust,
         xmax = xmax - (1 - value) * xwidth * (1 - hjust)
       )
@@ -190,12 +193,13 @@ plot_scmmib_summary <- function(
         grepl("__MERFISH$", id) ~ "MERFISH",
         grepl("__Xenium$",  id) ~ "Xenium",
         grepl("__SC$",      id) ~ "SC",
+        grepl("__Kidney$",  id) ~ "Kidney",
         TRUE                    ~ NA_character_
       ))
   }
   if (!"header_metric" %in% names(df_hdr)) {
     df_hdr <- df_hdr %>%
-      dplyr::mutate(header_metric = sub("__(Open|Stereo|MERFISH|Xenium|SC)$", "", id))
+      dplyr::mutate(header_metric = sub("__(Open|Stereo|MERFISH|Xenium|SC|Kidney)$", "", id))
   }
   
   
@@ -303,6 +307,32 @@ plot_scmmib_summary <- function(
       rect_data, linewidth = .25
     )
   }
+
+  # ---------- NA markers (draw "NA" text in any empty cell) ----------
+  na_text <- tibble()
+  if (nrow(circle_data) > 0) {
+    na_text <- dplyr::bind_rows(
+      na_text,
+      circle_data %>%
+        dplyr::filter(is.na(raw)) %>%
+        dplyr::transmute(x = x0, y = y0)
+    )
+  }
+  if (nrow(rect_data) > 0) {
+    na_text <- dplyr::bind_rows(
+      na_text,
+      rect_data %>%
+        dplyr::filter(is.na(value)) %>%
+        dplyr::transmute(x = cell_xc, y = cell_yc)
+    )
+  }
+  if (nrow(na_text) > 0) {
+    g <- g + geom_text(
+      aes(x = x, y = y, label = "NA"),
+      data = na_text,
+      size = 2.6, colour = "grey45", fontface = "italic"
+    )
+  }
   
   # Column headers
   if (nrow(text_data) > 0) {
@@ -359,11 +389,21 @@ read_metric_csv <- function(path) {
   d
 }
 
-df_stereo  <- read_metric_csv('/Users/yuling_zhu/Downloads/supervisedMetrics/metrics_results_develop.csv')
-df_open    <- read_metric_csv('/Users/yuling_zhu/Downloads/supervisedMetrics/metrics_results_human.csv')
-df_MERFISH <- read_metric_csv('/Users/yuling_zhu/Downloads/supervisedMetrics/metrics_results_0503Mouse.csv')
-df_xenium  <- read_metric_csv('/Users/yuling_zhu/Downloads/supervisedMetrics/metrics_results_regeneration.csv')
-df_sc      <- read_metric_csv('/Users/yuling_zhu/Downloads/supervisedMetrics/metrics_results_scNucleus.csv')
+# Helper: normalize column names across datasets (kidney.csv uses lowercase
+# `method` / `time` / `memory` and has an extra `n_stages_used` column).
+normalize_cols <- function(d) {
+  ren <- c(method = "Method", time = "Time", memory = "Memory")
+  hit <- intersect(names(ren), names(d))
+  if (length(hit)) names(d)[match(hit, names(d))] <- ren[hit]
+  d[, setdiff(names(d), "n_stages_used"), drop = FALSE]
+}
+
+df_stereo  <- normalize_cols(read_metric_csv('/Users/yuling_zhu/Downloads/supervisedMetrics/metrics_results_develop.csv'))
+df_open    <- normalize_cols(read_metric_csv('/Users/yuling_zhu/Downloads/supervisedMetrics/metrics_results_human.csv'))
+df_MERFISH <- normalize_cols(read_metric_csv('/Users/yuling_zhu/Downloads/supervisedMetrics/metrics_results_0503Mouse.csv'))
+df_xenium  <- normalize_cols(read_metric_csv('/Users/yuling_zhu/Downloads/supervisedMetrics/metrics_results_regeneration.csv'))
+df_sc      <- normalize_cols(read_metric_csv('/Users/yuling_zhu/Downloads/supervisedMetrics/metrics_results_scNucleus.csv'))
+df_kidney  <- normalize_cols(read_metric_csv('/Users/yuling_zhu/Downloads/supervisedMetrics/metrics_results_kidney.csv'))
 
 # Rename Memory -> "Peak Memory" in each dataset
 rename_memory <- function(d) dplyr::rename(d, `Peak Memory` = Memory)
@@ -372,6 +412,7 @@ df_open    <- rename_memory(df_open)
 df_MERFISH <- rename_memory(df_MERFISH)
 df_xenium  <- rename_memory(df_xenium)
 df_sc      <- rename_memory(df_sc)
+df_kidney  <- rename_memory(df_kidney)
 
 # Metric columns are everything EXCEPT the Method key column
 metric_cols <- setdiff(colnames(df_stereo), "Method")
@@ -389,11 +430,17 @@ df_open    <- shift_asw(df_open)
 df_MERFISH <- shift_asw(df_MERFISH)
 df_xenium  <- shift_asw(df_xenium)
 df_sc      <- shift_asw(df_sc)
+df_kidney  <- shift_asw(df_kidney)
 
 # Align rows to `methods` order, rename metric columns with dataset suffix,
 # and drop the Method key column (we keep a single Method column at the end).
+# Methods present in `methods` but missing from `d$Method` become NA rows.
 prep <- function(d, suffix) {
   d <- d[match(methods, d$Method), , drop = FALSE]
+  # Ensure every metric column exists (kidney lacks none after normalize, but
+  # keep this defensive for the all-NA case)
+  miss <- setdiff(metric_cols, names(d))
+  for (m in miss) d[[m]] <- NA_real_
   d <- dplyr::rename_with(d, ~ paste0(.x, suffix), all_of(metric_cols))
   dplyr::select(d, -Method)
 }
@@ -403,10 +450,11 @@ df_stereo2  <- prep(df_stereo,  "__Stereo")
 df_merfish2 <- prep(df_MERFISH, "__MERFISH")
 df_xenium2  <- prep(df_xenium,  "__Xenium")
 df_sc2      <- prep(df_sc,      "__SC")
+df_kidney2  <- prep(df_kidney,  "__Kidney")
 
 df_combo4 <- dplyr::bind_cols(
   tibble::tibble(Method = methods),
-  df_open2, df_stereo2, df_merfish2, df_xenium2, df_sc2
+  df_open2, df_stereo2, df_merfish2, df_xenium2, df_sc2, df_kidney2
 )
 
 
@@ -441,7 +489,7 @@ column_info <- dplyr::bind_rows(
   col_method,
   col_metrics %>%
     dplyr::mutate(metric_id = id) %>%
-    tidyr::crossing(dataset = c("Open", "Stereo", "MERFISH","Xenium","SC")) %>%
+    tidyr::crossing(dataset = c("Open", "Stereo", "MERFISH","Xenium","SC","Kidney")) %>%
     dplyr::mutate(
       id = paste0(metric_id, "__", dataset),
       header_metric = metric_id,
@@ -449,8 +497,9 @@ column_info <- dplyr::bind_rows(
         dataset == "Open"     ~ "Open-ST",
         dataset == "Stereo"   ~ "Stereo-seq",
         dataset == "MERFISH"  ~ "MERFISH",
-        dataset == "Xenium"  ~ "Xenium",
-        dataset == "SC"  ~ "SC",
+        dataset == "Xenium"   ~ "Xenium",
+        dataset == "SC"       ~ "SC",
+        dataset == "Kidney"   ~ "Kidney",
         TRUE                  ~ NA_character_
       )
     ) %>%
@@ -458,7 +507,7 @@ column_info <- dplyr::bind_rows(
 )
 # Ensure correct column order
 group_order   <- c("Alignment Accuracy", "Embedding Accuracy", "Efficiency")
-dataset_order <- c("Open", "Stereo", "MERFISH","Xenium","SC")
+dataset_order <- c("Open", "Stereo", "MERFISH","Xenium","SC","Kidney")
 column_info <- column_info %>%
   dplyr::mutate(
     dataset = dplyr::case_when(
@@ -466,13 +515,14 @@ column_info <- column_info %>%
       grepl("__Open$", id)     ~ "Open",
       grepl("__Stereo$", id)   ~ "Stereo",
       grepl("__MERFISH$", id)  ~ "MERFISH",
-      grepl("__Xenium$", id)  ~ "Xenium",
-      grepl("__SC$", id)  ~ "SC",
+      grepl("__Xenium$", id)   ~ "Xenium",
+      grepl("__SC$", id)       ~ "SC",
+      grepl("__Kidney$", id)   ~ "Kidney",
       TRUE                     ~ NA_character_
     ),
     metric_base = dplyr::case_when(
       id == "Method" ~ "Method",
-      TRUE ~ sub("__(Open|Stereo|MERFISH|Xenium|SC)$", "", id)
+      TRUE ~ sub("__(Open|Stereo|MERFISH|Xenium|SC|Kidney)$", "", id)
     )
   ) %>%
   dplyr::arrange(
