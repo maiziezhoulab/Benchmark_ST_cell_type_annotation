@@ -17,7 +17,7 @@ correct hierarchy.
 
 ## Main figures
 * Figure 2
-    * [2a](notebooks/pairwise-simulation.ipynb)
+    * [2a](Analysis/pairwise-simulation.ipynb)
     * [2b](notebooks/center-align-simulation.ipynb)
     * [2c](notebooks/center-align-simulation-scanorama-comparison.ipynb)
 * [Figure 3](notebooks/scc-analysis-pairwise-and-center.ipynb)
