@@ -18,7 +18,7 @@ correct hierarchy.
 ## Main figures
 * [Figure 2](Analysis/Label_transfer_Figure2.R)
 * [Figure 3](Analysis/Box_plotAndHeatmap_Figure1.ipynb)
-* [Figure 4](notebooks/scc-analysis-pairwise-and-center.ipynb)
+* [Figure 4](Analysis/Figure3a.R)
 * [Figure 5](notebooks/DLPFC_pairwise.ipynb)
 * [Figure 6](notebooks/DLPFC_center.ipynb)
 
