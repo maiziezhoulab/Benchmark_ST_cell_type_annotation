@@ -23,7 +23,7 @@ correct hierarchy.
 * [Figure 4c](Analysis/stackPlots_FinalVersion.r)
 * [Figure 5a](Analysis/Figure5a.ipynb)
 * [Figure 5b](Analysis/Figure5b.ipynb)
-* [Figure 5c and 5d](Analysis/Figure5b.ipynb)
+* [Figure 5c and 5d](Analysis/Figure5d.ipynb)
 * [Figure 6a](Analysis/Figure5a.ipynb)
 * [Figure 6c](notebooks/Figure5C.ipynb)
 
