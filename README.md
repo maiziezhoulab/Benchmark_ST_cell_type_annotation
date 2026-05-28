@@ -18,7 +18,8 @@ correct hierarchy.
 ## Main figures
 * [Figure 2](Analysis/Label_transfer_Figure2.R)
 * [Figure 3](Analysis/Mouse_Figure3.ipynb)
-* [Figure 4](Analysis/Figure3a.R)
+* [Figure 4a](Analysis/Figure3a.R)
+* [Figure 4b](Analysis/Figure3a.R)
 * [Figure 5](notebooks/DLPFC_pairwise.ipynb)
 * [Figure 6](notebooks/DLPFC_center.ipynb)
 
