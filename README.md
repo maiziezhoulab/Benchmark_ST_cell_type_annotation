@@ -25,6 +25,7 @@ correct hierarchy.
 * [Figure 5b](Analysis/Figure5b.ipynb)
 * [Figure 5c and 5d](Analysis/Figure5d.ipynb)
 * [Figure 6a](Analysis/Figure5d.ipynb)
+* [Figure 6b](Analysis/Figure5B.r)
 * [Figure 6c](notebooks/Figure5C.ipynb)
 
 ## Extended Data figures
