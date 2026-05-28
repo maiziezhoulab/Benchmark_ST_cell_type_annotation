@@ -25,7 +25,7 @@ correct hierarchy.
 * [Figure 5b](Analysis/Figure5b.ipynb)
 * [Figure 5c and 5d](Analysis/Figure5b.ipynb)
 * [Figure 6a](Analysis/Figure5a.ipynb)
-* [Figure 6](notebooks/DLPFC_center.ipynb)
+* [Figure 6c](notebooks/Figure5C.ipynb)
 
 ## Extended Data figures
 * [ED Figure 1](notebooks/stahl-bc-analysis.ipynb) 
