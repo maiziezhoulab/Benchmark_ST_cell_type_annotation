@@ -22,6 +22,8 @@ correct hierarchy.
 * [Figure 4b](Analysis/Figure4b.ipynb)
 * [Figure 4c](Analysis/stackPlots_FinalVersion.r)
 * [Figure 5a](Analysis/Figure5a.ipynb)
+* [Figure 5c and 5d](Analysis/Figure5a.ipynb)
+* [Figure 6a](Analysis/Figure5a.ipynb)
 * [Figure 6](notebooks/DLPFC_center.ipynb)
 
 ## Extended Data figures
