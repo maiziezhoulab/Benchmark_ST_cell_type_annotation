@@ -32,4 +32,4 @@ Data](https://www.nature.com/articles/s41592-022-01459-6).
 ## Supplementary figures
 * [Figure S1](Analysis/non-zero-count-figures.ipynb)
 * [Figure S2](Analysis/Supplemental2.ipynb)
-* [Figure S3](notebooks/stahl-bc-rotations.ipynb)
+* [Figure S3](Analysis/Supplemental3.ipynb)
