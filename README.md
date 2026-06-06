@@ -10,10 +10,6 @@ Data](https://www.nature.com/articles/s41592-022-01459-6).
 * [Dataset 4](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE269719)
 * [Dataset 5](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE139107)
 * [Dataset 6](https://db.cngb.org/stomics/artista)
-* For convenience there is a script called
-[`download_data.sh`](scripts/download_data.sh) that
-will download all the relevant files to the [data](data/) directory in the
-correct hierarchy.
 
 ## Main figures
 * [Figure 2](Analysis/Label_transfer_Figure2.R)
@@ -31,6 +27,7 @@ correct hierarchy.
 * [Figure 7b](Analysis/Figure7b.ipynb)
 * [Figure 7c and 7d](Analysis/Figure7c_7d.ipynb)
 * [Figure 8](Analysis/Figure8.ipynb)
+* [Figure 9](Analysis/Figure8.ipynb)
 
 ## Supplementary figures
 * [Figure S1](Analysis/non-zero-count-figures.ipynb)
