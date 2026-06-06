@@ -30,5 +30,5 @@ correct hierarchy.
 
 ## Supplementary figures
 * [Figure S1](Analysis/non-zero-count-figures.ipynb)
-* [Figure S2](Analysis/Supplemental.ipynb)
+* [Figure S2](Analysis/Supplemental2.ipynb)
 * [Figure S3](notebooks/stahl-bc-rotations.ipynb)
