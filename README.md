@@ -29,6 +29,6 @@ correct hierarchy.
 * [Figure 6c](notebooks/Figure5C.ipynb)
 
 ## Supplementary figures
-* [Figure S1](notebooks/non-zero-count-figures.ipynb)
-* [Figure S2](notebooks/sparsity-analysis.ipynb)
+* [Figure S1](Analysis/non-zero-count-figures.ipynb)
+* [Figure S2](Analysis/Supplemental.ipynb)
 * [Figure S3](notebooks/stahl-bc-rotations.ipynb)
