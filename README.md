@@ -27,7 +27,7 @@ Data](https://www.nature.com/articles/s41592-022-01459-6).
 * [Figure 7b](Analysis/Figure7b.ipynb)
 * [Figure 7c and 7d](Analysis/Figure7c_7d.ipynb)
 * [Figure 8](Analysis/Figure8.ipynb)
-* [Figure 9](Analysis/Figure8.ipynb)
+* [Figure 9](Analysis/Figure9.ipynb)
 
 ## Supplementary figures
 * [Figure S1](Analysis/non-zero-count-figures.ipynb)
