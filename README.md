@@ -27,7 +27,7 @@ correct hierarchy.
 * [Figure 6a](Analysis/Figure5d.ipynb)
 * [Figure 6b](Analysis/Figure6b.r)
 * [Figure 6c](notebooks/Figure5C.ipynb)
-* [Figure 7a](Analysis/Figure7c_7d.ipynb)
+* [Figure 7a](Analysis/Figure7a.ipynb)
 * [Figure 7b](Analysis/Figure7c_7d.ipynb)
 * [Figure 7c and 7d](Analysis/Figure7c_7d.ipynb)
 * [Figure 8](Analysis/Figure8.ipynb)
