@@ -1,7 +1,5 @@
 # Code reproducibility
-Code to reproduce the analysis and figures in the paper [Alignment and Integration of
-Spatial Transcriptomics
-Data](https://www.nature.com/articles/s41592-022-01459-6). 
+Code to reproduce the analysis and figures in the paper [Benchmarking cell type annotation in spatial transcriptomics: resolving cellular hierarchies, biological fidelity, and dynamic cell states](https://www.nature.com/articles/s41592-022-01459-6). 
 ## Datasets
 * All preprocessed datasets can be found on
 * [Dataset 1](https://doi.org/10.5281/zenodo.18039571)
