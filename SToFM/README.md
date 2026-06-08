@@ -5,7 +5,7 @@ Spatial Transcriptomics (ST) technologies provide biologists with rich insights 
 
 More information can be found in our [paper](https://arxiv.org/abs/2507.11588).
 
-![SToFM](assets/image.png)
+![SToFM](image.png)
 
 # Install
 
