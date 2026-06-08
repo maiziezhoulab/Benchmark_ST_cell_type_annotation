@@ -16,7 +16,7 @@ Data](https://www.nature.com/articles/s41592-022-01459-6).
 * [Figure 3](Analysis/Mouse_Figure3.ipynb)
 * [Figure 4a](Analysis/Figure4a.R)
 * [Figure 4b](Analysis/Figure4b.ipynb)
-* [Figure 4c](Analysis/stackPlots_FinalVersion.r)
+* [Figure 4c](Analysis/Figure4c.r)
 * [Figure 5a](Analysis/Figure5a.ipynb)
 * [Figure 5b](Analysis/Figure5b.ipynb)
 * [Figure 5c and 5d](Analysis/Figure5d.ipynb)
