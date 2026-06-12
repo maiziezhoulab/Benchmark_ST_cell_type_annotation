@@ -12,7 +12,7 @@ Code to reproduce the analysis and figures in the paper [Benchmarking cell type 
 ## Main figures
 * [Figure 2](Analysis/Label_transfer_Figure2.R)
 * [Figure 3](Analysis/Mouse_Figure3.ipynb)
-* [Figure 4a](Analysis/Figure4a.R)
+* [Figure 4a](Analysis/Figure4a.r)
 * [Figure 4b](Analysis/Figure4b.ipynb)
 * [Figure 4c](Analysis/Figure4c.r)
 * [Figure 5a](Analysis/Figure5a.ipynb)
