@@ -6,12 +6,10 @@ library(tibble)
 library(ggraph)
 library(ggplot2)
 # conda activate hest
-# ===================== 路径 =====================
 big_csv  <- "/maiziezhou_lab2/yuling/MouseSpinal/Project/CARD/0503_F4_C_output/big_group_accuracy_per_series.csv"
 sub_csv  <- "/maiziezhou_lab2/yuling/MouseSpinal/Project/CARD/0503_F4_C_output/subgroup_accuracy_per_series.csv"
 id_csv   <- "/maiziezhou_lab2/yuling/MouseSpinal/Project/CARD/0503_F4_C_output/identity_accuracy_per_series.csv"
 
-# ===================== 读入（series=1） =====================
 big_df <- read.csv(big_csv, check.names = FALSE)
 sub_df <- read.csv(sub_csv, check.names = FALSE)
 id_df  <- read.csv(id_csv , check.names = FALSE)
@@ -31,7 +29,6 @@ id_long <- as_tibble(id_row) %>%
   separate(colkey, into = c("group_name", "identity"), sep = "::", fill = "right", extra = "merge") %>%
   mutate(identity = trimws(identity))
 
-# ===================== 构图（Root -> 大组 -> 子组） =====================
 big_names <- big_long$name
 edges_root <- data.frame(from = "Root", to = big_names, stringsAsFactors = FALSE)
 
@@ -44,8 +41,6 @@ edges_children <- lapply(big_names, function(g) {
   data.frame(from = rep(g, length(subs)), to = subs, stringsAsFactors = FALSE)
 }) %>% bind_rows()
 
-# ===================== 关键：identity -> subgroup 映射 =====================
-# 与你 Python 的 GROUPS/GROUP_NAMES 一致（务必保持拼写一致）
 GN1 <- "MV+M+VH (intermedial→ventral)"
 GN2 <- "Dorsal excitatory"
 GN3 <- "Dorsal inhibitory"
@@ -72,25 +67,19 @@ SUBGROUP_MAP <- list(
   `Cholinergic(1)` = c("alpha motoneuron","gamma motoneuron","cholinergic interneuron","visceral motoneuron")
 )
 
-# 为快速查找，做成 identity -> parent_subgroup 的反向映射
 ID2PARENT <- enframe(SUBGROUP_MAP, name = "parent", value = "ids") %>%
   unnest_longer(ids) %>%
   transmute(identity = ids, parent = parent)
 
-# 把 identity 表与 parent_subgroup 连接（只保留能找到父节点的 identity）
 id_long_join <- id_long %>%
   left_join(ID2PARENT, by = "identity") %>%
   filter(!is.na(parent)) %>%
-  # 为了稳健：确认 group_name 与 parent 前缀一致（比如 "Dorsal excitatory" 前缀）
   rowwise() %>%
   filter(str_starts(parent, paste0("^", escape_regex(group_name)))) %>%
   ungroup()
-
-# 生成第三层边： parent_subgroup -> "GroupName::Identity"（显示名就用 colkey）
 edges_identity <- id_long_join %>%
   transmute(from = parent, to = paste0(group_name, "::", identity))
 
-# ===================== 汇总所有边 & 节点值 =====================
 edges <- bind_rows(edges_root, edges_children, edges_identity)
 
 node_big  <- big_long %>% select(name, value)
@@ -100,7 +89,6 @@ node_id   <- id_long_join %>% transmute(name = paste0(group_name, "::", identity
 node_root <- tibble(name = "Root", value = sum(node_big$value, na.rm = TRUE))
 node_values <- bind_rows(node_root, node_big, node_sub, node_id) %>% distinct(name, .keep_all = TRUE)
 
-# ===================== 画图（加长画布，标签直接放在节点上方） =====================
 g <- graph_from_data_frame(edges, directed = TRUE, vertices = node_values)
 
 V(g)$children <- degree(g, mode = "out")
@@ -116,7 +104,6 @@ y_stretch <- 5.5
 lay$x <- lay$x * x_stretch
 lay$y <- lay$y * y_stretch
 
-# 旋转：逆时针 90°
 tmp <- lay$x
 lay$x <- -lay$y
 lay$y <-  tmp
