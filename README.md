@@ -28,7 +28,7 @@ Code to reproduce the analysis and figures in the paper [Benchmarking cell type 
 * [Figure 9](Analysis/Figure9.ipynb)
 
 ## Supplementary figures
-* [Figure S1](Analysis/non-zero-count-figures.ipynb)
+* [Figure S1](Analysis/Supplemental1.r)
 * [Figure S2](Analysis/Supplemental2.ipynb)
 * [Figure S3](Analysis/Supplemental3.ipynb)
   
