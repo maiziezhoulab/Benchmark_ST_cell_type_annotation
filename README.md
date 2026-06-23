@@ -34,3 +34,6 @@ Code to reproduce the analysis and figures in the paper "Benchmarking cell type 
   
 ## Results
 All results generated for evaluation can be found [zenodo](https://zenodo.org/records/20720105).
+
+## Cite this work
+Y. Zhu†, Y. Hu†, M. B. Xie†, H. Qin, Z. J. Szul, D. M. Young, W. Yuan, Q. Wang, Y. H. Liu, W. Shen, S. Meltzer*, X. M. Zhou*. Benchmarking cell type annotation in spatial transcriptomics: resolving cellular hierarchies, biological fidelity, and dynamic cell states. [bioRixv](https://www.biorxiv.org/content/10.64898/2026.06.16.732716v1) (2026) 
