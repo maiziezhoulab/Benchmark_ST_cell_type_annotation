@@ -20,7 +20,7 @@ Code to reproduce the analysis and figures in the paper "Benchmarking cell type 
 * [Figure 5c and 5d](Analysis/Figure5d.ipynb)
 * [Figure 6a](Analysis/Figure5d.ipynb)
 * [Figure 6b](Analysis/Figure6b.r)
-* [Figure 6c](notebooks/Figure6C.ipynb)
+* [Figure 6c](Analysis/Figure6C.ipynb)
 * [Figure 7a](Analysis/Figure7a.ipynb)
 * [Figure 7b](Analysis/Figure7b.ipynb)
 * [Figure 7c and 7d](Analysis/Figure7c_7d.ipynb)
